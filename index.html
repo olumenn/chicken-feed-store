@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feather & Flock Agro-Market // Premium Poultry Nutrition & Supplies</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        amberGold: '#d97706',
+                        earthBrown: '#78350f',
+                        farmGreen: '#15803d',
+                        lightBg: '#fdfbf7',
+                        agroGreen: '#16a34a',
+                        agroDark: '#065f46'
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Outfit', sans-serif; }
+        .hero-pattern {
+            background-color: #78350f;
+            background-image: radial-gradient(#92400e 1px, transparent 1px), radial-gradient(#92400e 1px, #78350f 1px);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+        }
+        .market-banner-gradient {
+            background: linear-gradient(135deg, #78350f 0%, #b45309 50%, #15803d 100%);
+        }
+    </style>
+</head>
+<body class="bg-lightBg text-slate-800 min-h-screen flex flex-col justify-between selection:bg-amber-500 selection:text-white">
+
+    <!-- Top Announcement & Utility Bar -->
+    <div class="bg-earthBrown text-amber-50 text-xs py-2.5 px-4 border-b border-amber-900/20">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+            <div class="flex items-center space-x-4">
+                <span><i class="fa-solid fa-phone-volume mr-1.5 text-amber-400"></i> Hotline: (555) 492-3333</span>
+                <span class="hidden md:inline"><i class="fa-solid fa-envelope mr-1.5 text-amber-400"></i> support@featherflock.com</span>
+            </div>
+            <div class="flex items-center space-x-6 font-medium">
+                <span class="bg-amber-600/60 px-2.5 py-0.5 rounded-full text-[11px]"><i class="fa-solid fa-shield-halved mr-1"></i> 100% Verified Quality Feed</span>
+                <a href="#contact" class="hover:text-amber-300 transition">Store Locations</a>
+                <a href="#about" class="hover:text-amber-300 transition">Bulk Orders</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Header (Afrimash Marketplace Style) -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-amber-900/10 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center space-x-3 flex-shrink-0">
+                <div class="w-12 h-12 rounded-2xl bg-amber-600 flex items-center justify-center text-white text-2xl shadow-lg shadow-amber-600/30">
+                    <i class="fa-solid fa-wheat-awn"></i>
+                </div>
+                <div>
+                    <span class="font-extrabold text-xl tracking-tight text-earthBrown block leading-none">Feather & Flock</span>
+                    <span class="text-[11px] text-amber-600 font-bold tracking-widest uppercase">Agro-Marketplace</span>
+                </div>
+            </a>
+
+            <!-- Search Bar in Header -->
+            <div class="hidden lg:flex flex-grow max-w-xl mx-4">
+                <div class="relative w-full flex items-center">
+                    <input type="text" id="global-search" oninput="handleSearch()" placeholder="Search feeds, supplements, incubators, chicks..." 
+                        class="w-full pl-4 pr-28 py-3 rounded-2xl bg-amber-50/70 border border-amber-200 text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500">
+                    <button onclick="handleSearch()" class="absolute right-1.5 px-5 py-2 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs transition shadow-md">
+                        Search
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quick Action Links & Cart -->
+            <div class="flex items-center space-x-3">
+                <button onclick="toggleTrackerModal()" class="hidden md:flex items-center space-x-2 px-4 py-2.5 rounded-2xl bg-amber-50 hover:bg-amber-100 text-earthBrown text-xs font-bold transition border border-amber-200">
+                    <i class="fa-solid fa-truck-fast text-amber-600"></i>
+                    <span>Track Order</span>
+                </button>
+                <button onclick="toggleCartModal()" class="relative p-3 rounded-2xl bg-amber-600 text-white hover:bg-amber-500 transition flex items-center space-x-2 shadow-lg shadow-amber-600/20">
+                    <i class="fa-solid fa-cart-shopping text-base"></i>
+                    <span id="cart-badge" class="absolute -top-1.5 -right-1.5 bg-earthBrown text-amber-300 text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold border-2 border-white shadow-md">0</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Secondary Categories Sub-bar -->
+        <div class="bg-amber-900/5 border-t border-amber-900/10 hidden md:block">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-12 flex items-center justify-between text-xs font-bold text-slate-700 overflow-x-auto">
+                <div class="flex items-center space-x-8 whitespace-nowrap">
+                    <button onclick="filterProducts('all')" class="hover:text-amber-700 transition flex items-center space-x-1.5"><i class="fa-solid fa-border-all text-amber-600"></i><span>All Agro Supplies</span></button>
+                    <button onclick="filterProducts('Feed')" class="hover:text-amber-700 transition flex items-center space-x-1.5"><i class="fa-solid fa-wheat-awn text-amber-600"></i><span>Poultry Feeds</span></button>
+                    <button onclick="filterProducts('Supplement')" class="hover:text-amber-700 transition flex items-center space-x-1.5"><i class="fa-solid fa-prescription-bottle-medical text-amber-600"></i><span>Vitamins & Meds</span></button>
+                    <button onclick="filterProducts('Equipment')" class="hover:text-amber-700 transition flex items-center space-x-1.5"><i class="fa-solid fa-toolbox text-amber-600"></i><span>Coop & Equipment</span></button>
+                    <button onclick="filterProducts('Livestock')" class="hover:text-amber-700 transition flex items-center space-x-1.5"><i class="fa-solid fa-feather text-amber-600"></i><span>Chicks & Livestock</span></button>
+                    <button onclick="filterProducts('Treat')" class="hover:text-amber-700 transition flex items-center space-x-1.5"><i class="fa-solid fa-seedling text-amber-600"></i><span>Scratch & Treats</span></button>
+                </div>
+                <div class="text-amber-700 font-extrabold flex items-center space-x-1">
+                    <i class="fa-solid fa-truck-ramp-box"></i>
+                    <span>Nationwide Ag Logistics</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+        
+        <!-- Marketplace Hero Section -->
+        <section class="relative market-banner-gradient text-white py-16 lg:py-24 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <span class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-white/10 text-amber-200 text-xs font-bold uppercase tracking-wider border border-white/20 backdrop-blur-md">
+                        <i class="fa-solid fa-certificate"></i>
+                        <span>Certified Farm Input Marketplace</span>
+                    </span>
+                    <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-tight">
+                        Everything Your Farm Needs for <span class="text-amber-300">Maximum Yield</span>
+                    </h1>
+                    <p class="text-amber-100 text-base sm:text-lg max-w-xl font-light leading-relaxed">
+                        Order premium poultry feeds, high-performance vitamins, sturdy feeders, and day-old chicks directly delivered to your farm gate with guaranteed freshness.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center space-y-3 sm:space-y-0 sm:space-x-4 pt-2">
+                        <a href="#products" class="px-8 py-4 rounded-2xl bg-amber-500 hover:bg-amber-400 text-earthBrown font-extrabold text-center transition shadow-xl shadow-amber-600/30">
+                            Explore Marketplace
+                        </a>
+                        <a href="#calculator" class="px-8 py-4 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-semibold text-center transition border border-white/20 backdrop-blur-md">
+                            Feed Requirement Calculator
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hero Quick Feature Grid -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-white/10 backdrop-blur-md p-6 rounded-3xl border border-white/20 space-y-3 shadow-xl">
+                        <div class="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-300 flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-shield-check"></i>
+                        </div>
+                        <h4 class="font-bold text-base text-white">Genuine Inputs</h4>
+                        <p class="text-xs text-amber-100">Sourced directly from verified top manufacturers and mills.</p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md p-6 rounded-3xl border border-white/20 space-y-3 shadow-xl">
+                        <div class="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-300 flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-truck-fast"></i>
+                        </div>
+                        <h4 class="font-bold text-base text-white">Fast Farm Delivery</h4>
+                        <p class="text-xs text-amber-100">Prompt dispatch across all regions with bulk rate discounts.</p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md p-6 rounded-3xl border border-white/20 space-y-3 shadow-xl">
+                        <div class="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-300 flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-headset"></i>
+                        </div>
+                        <h4 class="font-bold text-base text-white">Agric Vet Support</h4>
+                        <p class="text-xs text-amber-100">Consult with experienced livestock and poultry nutritionists.</p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md p-6 rounded-3xl border border-white/20 space-y-3 shadow-xl">
+                        <div class="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-300 flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-box-archive"></i>
+                        </div>
+                        <h4 class="font-bold text-base text-white">Bulk Wholesale</h4>
+                        <p class="text-xs text-amber-100">Special wholesale pricing for commercial farms and cooperatives.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Catalog Section -->
+        <section id="products" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-amber-900/10 pb-6">
+                <div>
+                    <span class="text-amber-600 text-xs font-bold uppercase tracking-widest block mb-1">Afrimash Style Catalog</span>
+                    <h2 class="text-3xl font-extrabold text-earthBrown">Agricultural Inputs & Supplies</h2>
+                </div>
+                <!-- Category Filter Buttons for Mobile/Desktop -->
+                <div class="flex items-center space-x-2 overflow-x-auto pb-2">
+                    <button onclick="filterProducts('all')" id="btn-all" class="px-4 py-2 rounded-xl text-xs font-bold bg-earthBrown text-white transition shadow-sm">All</button>
+                    <button onclick="filterProducts('Feed')" id="btn-Feed" class="px-4 py-2 rounded-xl text-xs font-bold bg-amber-100 text-earthBrown hover:bg-amber-200 transition">Feeds</button>
+                    <button onclick="filterProducts('Supplement')" id="btn-Supplement" class="px-4 py-2 rounded-xl text-xs font-bold bg-amber-100 text-earthBrown hover:bg-amber-200 transition">Vitamins</button>
+                    <button onclick="filterProducts('Equipment')" id="btn-Equipment" class="px-4 py-2 rounded-xl text-xs font-bold bg-amber-100 text-earthBrown hover:bg-amber-200 transition">Equipment</button>
+                    <button onclick="filterProducts('Livestock')" id="btn-Livestock" class="px-4 py-2 rounded-xl text-xs font-bold bg-amber-100 text-earthBrown hover:bg-amber-200 transition">Livestock</button>
+                    <button onclick="filterProducts('Treat')" id="btn-Treat" class="px-4 py-2 rounded-xl text-xs font-bold bg-amber-100 text-earthBrown hover:bg-amber-200 transition">Treats</button>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Populated Dynamically via JavaScript -->
+            </div>
+        </section>
+
+        <!-- Feed Calculator Section -->
+        <section id="calculator" class="bg-amber-900/5 py-16 border-y border-amber-900/10">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+                <div class="text-center space-y-2">
+                    <span class="text-amber-600 text-xs font-bold uppercase tracking-widest block">Interactive Tool</span>
+                    <h2 class="text-3xl font-extrabold text-earthBrown">Weekly Farm Feed Requirement Calculator</h2>
+                    <p class="text-slate-600 text-sm max-w-xl mx-auto">Estimate precisely how many 50lb bags of feed your flock requires per week.</p>
+                </div>
+
+                <div class="bg-white p-8 rounded-3xl shadow-xl border border-amber-900/10 space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Number of Birds in Flock</label>
+                            <input type="number" id="calc-birds" value="50" min="1" max="50000" oninput="calculateFeed()"
+                                class="w-full px-4 py-3 rounded-2xl bg-amber-50 border border-amber-200 text-slate-800 font-bold focus:outline-none focus:ring-2 focus:ring-amber-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Flock Life Stage</label>
+                            <select id="calc-stage" onchange="calculateFeed()"
+                                class="w-full px-4 py-3 rounded-2xl bg-amber-50 border border-amber-200 text-slate-800 font-bold focus:outline-none focus:ring-2 focus:ring-amber-500">
+                                <option value="0.2">Chicks / Starter (0 - 8 weeks)</option>
+                                <option value="0.25">Growers / Pullets (8 - 20 weeks)</option>
+                                <option value="0.3" selected>Laying Hens (20+ weeks / ~0.3 lb/day)</option>
+                                <option value="0.35">Meat Birds / Broilers</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="p-6 rounded-2xl bg-amber-600 text-white flex flex-col sm:flex-row items-center justify-between gap-4 shadow-lg">
+                        <div>
+                            <span class="text-xs uppercase tracking-wider text-amber-200 font-semibold block">Total Estimated Feed Needed</span>
+                            <span id="calc-result-lbs" class="text-3xl font-extrabold">105.0 lbs</span>
+                            <span class="text-xs text-amber-100 block mt-0.5">Roughly <span id="calc-result-bags">3</span> x 50lb bag(s) per week</span>
+                        </div>
+                        <button onclick="addCalculatedToCart()" class="px-6 py-3 rounded-xl bg-white text-earthBrown hover:bg-amber-50 font-extrabold text-sm transition shadow-md">
+                            <i class="fa-solid fa-cart-plus mr-2"></i> Add Calculated Feed to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About & Quality Section -->
+        <section id="about" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-12">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <span class="text-amber-600 text-xs font-bold uppercase tracking-widest block">Why Choose Feather & Flock</span>
+                    <h2 class="text-3xl font-extrabold text-earthBrown">Empowering Farmers with Quality Inputs</h2>
+                    <p class="text-slate-600 leading-relaxed text-sm sm:text-base">
+                        Modeled after leading agricultural marketplaces like Afrimash, we bring all your farm needs under one roof. Whether you manage a backyard coop or a commercial poultry farm, our certified inputs ensure optimal livestock health and peak production.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                        <div class="flex items-start space-x-3">
+                            <div class="w-8 h-8 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center flex-shrink-0 mt-1"><i class="fa-solid fa-check text-xs"></i></div>
+                            <div>
+                                <h4 class="font-bold text-sm text-slate-800">Direct Mill Freshness</h4>
+                                <p class="text-xs text-slate-500">Milled and packaged weekly to preserve nutrients.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-8 h-8 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center flex-shrink-0 mt-1"><i class="fa-solid fa-check text-xs"></i></div>
+                            <div>
+                                <h4 class="font-bold text-sm text-slate-800">Secure Farm Delivery</h4>
+                                <p class="text-xs text-slate-500">Safe handling and doorstep delivery for all orders.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-amber-100/50 p-8 rounded-3xl border border-amber-900/10 grid grid-cols-2 gap-6 text-center">
+                    <div class="bg-white p-6 rounded-2xl shadow-sm space-y-2">
+                        <i class="fa-solid fa-tractor text-3xl text-amber-600"></i>
+                        <h4 class="font-bold text-base text-earthBrown">Agro-Industrial</h4>
+                        <p class="text-xs text-slate-500">Professional equipment & feeds.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm space-y-2">
+                        <i class="fa-solid fa-handshake text-3xl text-amber-600"></i>
+                        <h4 class="font-bold text-base text-earthBrown">Trusted Partner</h4>
+                        <p class="text-xs text-slate-500">Supporting thousands of farms.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm space-y-2">
+                        <i class="fa-solid fa-box-open text-3xl text-amber-600"></i>
+                        <h4 class="font-bold text-base text-earthBrown">Bulk Discounts</h4>
+                        <p class="text-xs text-slate-500">Special rates for cooperatives.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm space-y-2">
+                        <i class="fa-solid fa-user-doctor text-3xl text-amber-600"></i>
+                        <h4 class="font-bold text-base text-earthBrown">Vet Guidance</h4>
+                        <p class="text-xs text-slate-500">Expert livestock advice on call.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact & Location Section -->
+        <section id="contact" class="bg-earthBrown text-white py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="space-y-6">
+                    <span class="text-amber-400 text-xs font-bold uppercase tracking-widest block">Agricultural Hub</span>
+                    <h2 class="text-3xl font-extrabold">Visit Our Central Depot or Contact Support</h2>
+                    <p class="text-amber-100 text-sm">Need help with custom feed formulations or bulk transport? Get in touch with our agricultural customer support desk.</p>
+                    
+                    <div class="space-y-4 pt-2">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-10 h-10 rounded-xl bg-amber-700 text-amber-300 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-location-dot"></i></div>
+                            <div>
+                                <span class="text-xs text-amber-300 block">Depot Address</span>
+                                <span class="font-semibold text-sm">742 Agro-Industrial Park, Grainville, OR 97321</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="w-10 h-10 rounded-xl bg-amber-700 text-amber-300 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-clock"></i></div>
+                            <div>
+                                <span class="text-xs text-amber-300 block">Working Hours</span>
+                                <span class="font-semibold text-sm">Mon - Sat: 7:00 AM - 6:00 PM | Sun: 9:00 AM - 2:00 PM</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="w-10 h-10 rounded-xl bg-amber-700 text-amber-300 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-phone"></i></div>
+                            <div>
+                                <span class="text-xs text-amber-300 block">Direct Order Hotline</span>
+                                <span class="font-semibold text-sm">(555) 492-3333</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Inquiry Form -->
+                <div class="bg-amber-950 p-8 rounded-3xl border border-amber-800 space-y-4">
+                    <h3 class="text-xl font-bold text-amber-200">Request Bulk Quote or Support</h3>
+                    <form onsubmit="handleInquiry(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-amber-300 uppercase mb-1">Your Name / Farm Name</label>
+                            <input type="text" required placeholder="Green Valley Poultry Farm" 
+                                class="w-full px-4 py-3 rounded-xl bg-amber-900/60 border border-amber-700 text-white placeholder-amber-500 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-amber-300 uppercase mb-1">Email or Phone</label>
+                            <input type="text" required placeholder="farmer@greenvalley.com" 
+                                class="w-full px-4 py-3 rounded-xl bg-amber-900/60 border border-amber-700 text-white placeholder-amber-500 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-amber-300 uppercase mb-1">Inquiry / Requirements</label>
+                            <textarea rows="3" required placeholder="Need 50 bags of layer mash delivered next Tuesday..." 
+                                class="w-full px-4 py-3 rounded-xl bg-amber-900/60 border border-amber-700 text-white placeholder-amber-500 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500"></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-earthBrown font-extrabold text-sm transition shadow-lg">
+                            Submit Inquiry
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Shopping Cart Slide-over / Modal -->
+    <div id="cart-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex justify-end">
+        <div class="bg-white w-full max-w-md h-full shadow-2xl flex flex-col justify-between p-6">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                <h3 class="text-xl font-extrabold text-earthBrown flex items-center space-x-2">
+                    <i class="fa-solid fa-cart-shopping text-amber-600"></i>
+                    <span>Your Marketplace Cart</span>
+                </h3>
+                <button onclick="toggleCartModal()" class="text-slate-400 hover:text-slate-600 text-lg"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <!-- Cart Items Container -->
+            <div id="cart-items-container" class="flex-grow overflow-y-auto py-4 space-y-4">
+                <!-- Populated dynamically -->
+            </div>
+
+            <!-- Cart Footer & Checkout -->
+            <div class="border-t border-slate-100 pt-4 space-y-4">
+                <div class="flex items-center justify-between text-base font-bold text-slate-700">
+                    <span>Subtotal:</span>
+                    <span id="cart-subtotal" class="text-earthBrown text-xl">$0.00</span>
+                </div>
+                <button onclick="checkout()" class="w-full py-4 rounded-2xl bg-amber-600 hover:bg-amber-500 text-white font-extrabold text-center transition shadow-lg shadow-amber-600/30">
+                    Proceed to Secure Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Tracker Modal -->
+    <div id="tracker-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-md rounded-3xl p-6 shadow-2xl space-y-4 border border-amber-900/10">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                <h3 class="text-lg font-bold text-earthBrown flex items-center space-x-2">
+                    <i class="fa-solid fa-truck-fast text-amber-600"></i>
+                    <span>Track Your Farm Delivery</span>
+                </h3>
+                <button onclick="toggleTrackerModal()" class="text-slate-400 hover:text-slate-600 text-lg"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Order Tracking Number</label>
+                    <input type="text" id="track-id" placeholder="e.g. FF-94821" 
+                        class="w-full px-4 py-3 rounded-xl bg-amber-50 border border-amber-200 text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500">
+                </div>
+                <button onclick="checkOrderStatus()" class="w-full py-3 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-bold text-sm transition">
+                    Check Status
+                </button>
+                <div id="track-result" class="hidden p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs space-y-1">
+                    <p class="font-bold">Status: Out for Delivery</p>
+                    <p>Estimated Arrival: Today by 3:30 PM</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-10 text-center text-xs border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+            <div class="flex flex-wrap justify-center gap-6 text-slate-300 font-semibold mb-4">
+                <a href="#products" class="hover:text-amber-400 transition">Marketplace Catalog</a>
+                <a href="#calculator" class="hover:text-amber-400 transition">Feed Calculator</a>
+                <a href="#about" class="hover:text-amber-400 transition">Quality Standards</a>
+                <a href="#contact" class="hover:text-amber-400 transition">Contact Depot</a>
+            </div>
+            <p>&copy; 2026 Feather & Flock Agro-Market Co. All rights reserved. Your premier marketplace for agricultural inputs.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Expanded Afrimash-style Product Catalog
+        const products = [
+            { id: 1, name: 'Golden Chick Starter Crumble (20% Protein)', category: 'Feed', price: 28.50, size: '50 lb bag', rating: 4.9, desc: 'Medicated/Non-medicated crumble packed with essential vitamins and amino acids for chicks from day 1 to 8 weeks.', icon: 'fa-wheat-awn' },
+            { id: 2, name: 'Prairie Gold Layer Pellets (16% Calcium)', category: 'Feed', price: 26.00, size: '50 lb bag', rating: 4.8, desc: 'Complete daily nutrition for laying hens with added oyster shell calcium for unbreakable eggshells and rich yolks.', icon: 'fa-egg' },
+            { id: 3, name: 'All-Flock Grower & Maintenance Pellets', category: 'Feed', price: 27.50, size: '50 lb bag', rating: 4.7, desc: 'Versatile formula suitable for mixed flocks containing ducks, geese, turkeys, and laying hens.', icon: 'fa-crow' },
+            { id: 4, name: 'Vital-Boost Poultry Multi-Vitamin & Electrolytes', category: 'Supplement', price: 15.00, size: '1 kg pack', rating: 5.0, desc: 'Essential water-soluble vitamins to combat heat stress, boost immunity, and accelerate recovery after vaccination.', icon: 'fa-prescription-bottle-medical' },
+            { id: 5, name: 'Automatic Poultry Drinker Cups & Tubing Kit', category: 'Equipment', price: 34.00, size: '10 pcs set', rating: 4.6, desc: 'Durable automatic nipple drinkers to ensure clean, contamination-free water supply for your entire coop.', icon: 'fa-toolbox' },
+            { id: 6, name: 'Day-Old Broiler Chicks (Vaccinated Pack of 50)', category: 'Livestock', price: 85.00, size: 'Crate of 50', rating: 4.9, desc: 'Healthy, robust, fast-growing broiler chicks vaccinated against Marek and Gumboro diseases.', icon: 'fa-feather' },
+            { id: 7, name: 'Sun-Kissed Scratch Grains Treat', category: 'Treat', price: 22.00, size: '40 lb bag', rating: 4.7, desc: 'A premium blend of cracked corn, wheat, and barley. Perfect as an afternoon scratch treat to encourage natural foraging.', icon: 'fa-seedling' },
+            { id: 8, name: 'Organic Mealworm & Insect Protein Boost', category: 'Supplement', price: 18.50, size: '10 lb bag', rating: 4.9, desc: 'Dried whole mealworms packed with protein to enhance feather growth during molting and boost egg production.', icon: 'fa-worm' },
+            { id: 9, name: 'Galvanized Hanging Feeder (25kg Capacity)', category: 'Equipment', price: 24.50, size: '1 Unit', rating: 4.8, desc: 'Heavy-duty galvanized steel feeder designed to prevent feed wastage and withstand harsh coop conditions.', icon: 'fa-box-archive' }
+        ];
+
+        let cart = [];
+        let currentFilter = 'all';
+
+        window.onload = function() {
+            renderProducts();
+            calculateFeed();
+        };
+
+        function filterProducts(category) {
+            currentFilter = category;
+            ['all', 'Feed', 'Supplement', 'Equipment', 'Livestock', 'Treat'].forEach(cat => {
+                const btn = document.getElementById(`btn-${cat}`);
+                if (btn) {
+                    if (cat === category) {
+                        btn.className = 'px-4 py-2 rounded-xl text-xs font-bold bg-earthBrown text-white transition shadow-sm';
+                    } else {
+                        btn.className = 'px-4 py-2 rounded-xl text-xs font-bold bg-amber-100 text-earthBrown hover:bg-amber-200 transition';
+                    }
+                }
+            });
+            renderProducts();
+        }
+
+        function handleSearch() {
+            const query = document.getElementById('global-search').value.toLowerCase();
+            renderProducts(query);
+        }
+
+        function renderProducts(searchQuery = '') {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = '';
+
+            let filtered = currentFilter === 'all' ? products : products.filter(p => p.category === currentFilter);
+            if (searchQuery) {
+                filtered = filtered.filter(p => p.name.toLowerCase().includes(searchQuery) || p.desc.toLowerCase().includes(searchQuery));
+            }
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full py-16 text-center text-slate-400 space-y-2">
+                        <i class="fa-solid fa-magnifying-glass text-4xl opacity-40"></i>
+                        <p class="text-sm font-semibold">No agricultural products found matching your search.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filtered.forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'bg-white p-6 rounded-3xl border border-amber-900/10 shadow-sm hover:shadow-xl transition flex flex-col justify-between space-y-4';
+                card.innerHTML = `
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-xl shadow-inner">
+                                <i class="fa-solid ${p.icon}"></i>
+                            </div>
+                            <div class="flex items-center space-x-1 text-xs font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-full border border-amber-200">
+                                <i class="fa-solid fa-star"></i><span>${p.rating}</span>
+                            </div>
+                        </div>
+                        <span class="text-[10px] font-extrabold uppercase tracking-widest text-amber-600 bg-amber-50 px-2.5 py-1 rounded-md inline-block mb-1.5">${p.category}</span>
+                        <h3 class="font-bold text-base text-earthOwner text-earthBrown mb-1">${p.name}</h3>
+                        <p class="text-xs text-slate-500 leading-relaxed">${p.desc}</p>
+                    </div>
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-xs text-slate-400 font-medium">Pack / Size: <strong class="text-slate-700">${p.size}</strong></span>
+                        </div>
+                        <div class="flex items-center justify-between pt-3 border-t border-slate-100">
+                            <span class="text-2xl font-extrabold text-earthBrown">$${p.price.toFixed(2)}</span>
+                            <button onclick="addToCart(${p.id})" class="px-4 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-extrabold text-xs transition shadow-md shadow-amber-600/20 flex items-center space-x-1.5">
+                                <i class="fa-solid fa-cart-plus"></i><span>Add to Cart</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function calculateFeed() {
+            const birds = parseInt(document.getElementById('calc-birds').value) || 50;
+            const rate = parseFloat(document.getElementById('calc-stage').value) || 0.3;
+            
+            const totalLbsPerDay = birds * rate;
+            const totalLbsPerWeek = totalLbsPerDay * 7;
+            const bagsPerWeek = Math.ceil(totalLbsPerWeek / 50);
+
+            document.getElementById('calc-result-lbs').innerText = `${totalLbsPerWeek.toFixed(1)} lbs`;
+            document.getElementById('calc-result-bags').innerText = bagsPerWeek;
+        }
+
+        function addCalculatedToCart() {
+            const birds = parseInt(document.getElementById('calc-birds').value) || 50;
+            const rate = parseFloat(document.getElementById('calc-stage').value) || 0.3;
+            const bags = Math.ceil((birds * rate * 7) / 50);
+            
+            const feed = products[1];
+            const existing = cart.find(item => item.id === feed.id);
+            if (existing) {
+                existing.qty += bags;
+            } else {
+                cart.push({ ...feed, qty: bags });
+            }
+            updateCartBadge();
+            toggleCartModal();
+        }
+
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            const existing = cart.find(item => item.id === id);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({ ...product, qty: 1 });
+            }
+            updateCartBadge();
+            toggleCartModal();
+        }
+
+        function updateCartBadge() {
+            const count = cart.reduce((sum, item) => sum + item.qty, 0);
+            document.getElementById('cart-badge').innerText = count;
+        }
+
+        function toggleCartModal() {
+            const modal = document.getElementById('cart-modal');
+            modal.classList.toggle('hidden');
+            if (!modal.classList.contains('hidden')) {
+                renderCartItems();
+            }
+        }
+
+        function toggleTrackerModal() {
+            const modal = document.getElementById('tracker-modal');
+            modal.classList.toggle('hidden');
+        }
+
+        function checkOrderStatus() {
+            const trackId = document.getElementById('track-id').value.trim();
+            const result = document.getElementById('track-result');
+            if (trackId) {
+                result.classList.remove('hidden');
+            }
+        }
+
+        function renderCartItems() {
+            const container = document.getElementById('cart-items-container');
+            container.innerHTML = '';
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-16 text-slate-400 space-y-2">
+                        <i class="fa-solid fa-basket-shopping text-4xl opacity-40"></i>
+                        <p class="text-sm font-medium">Your marketplace cart is empty.</p>
+                    </div>
+                `;
+                document.getElementById('cart-subtotal').innerText = '$0.00';
+                return;
+            }
+
+            let subtotal = 0;
+            cart.forEach(item => {
+                subtotal += item.price * item.qty;
+                const div = document.createElement('div');
+                div.className = 'flex items-center justify-between p-3 rounded-2xl bg-amber-50/50 border border-amber-100';
+                div.innerHTML = `
+                    <div>
+                        <h4 class="font-bold text-xs text-earthBrown">${item.name}</h4>
+                        <span class="text-xs text-slate-500">$${item.price.toFixed(2)} x ${item.qty}</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <button onclick="changeQty(${item.id}, 1)" class="w-7 h-7 rounded-lg bg-amber-200 text-earthBrown font-bold text-xs">+</button>
+                        <button onclick="changeQty(${item.id}, -1)" class="w-7 h-7 rounded-lg bg-amber-200 text-earthBrown font-bold text-xs">-</button>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+
+            document.getElementById('cart-subtotal').innerText = `$${subtotal.toFixed(2)}`;
+        }
+
+        function changeQty(id, delta) {
+            const item = cart.find(i => i.id === id);
+            if (item) {
+                item.qty += delta;
+                if (item.qty <= 0) {
+                    cart = cart.filter(i => i.id !== id);
+                }
+            }
+            updateCartBadge();
+            renderCartItems();
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                return;
+            }
+            alert('Order placed successfully! Your agricultural inputs are being prepared for farm delivery.');
+            cart = [];
+            updateCartBadge();
+            toggleCartModal();
+        }
+
+        function handleInquiry(e) {
+            e.preventDefault();
+            alert('Thank you! Our agricultural support team has received your quote inquiry and will call you shortly.');
+            e.target.reset();
+        }
+    </script>
+</body>
+</html>
