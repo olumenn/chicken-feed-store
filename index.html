@@ -426,18 +426,18 @@
     <script>
         // Expanded Afrimash-style Product Catalog (Converted to Naira: 1 USD = 1500 NGN)
         const products = [
-            { id: 1, name: 'Layer concentrate', category: 'Feed', price: 18500, size: '25kg', rating: 4.8, desc: 'High-quality layer concentrate for balanced nutrition.', imageUrl: 'https://images.unsplash.com/photo-1596492784531-20641347076a?q=80&w=200&auto=format&fit=crop' },
-            { id: 2, name: 'Broiler concentrate', category: 'Feed', price: 19000, size: '25kg', rating: 4.9, desc: 'Specially formulated for broiler growth.', imageUrl: 'https://images.unsplash.com/photo-1605000794959-122e23d00f60?q=80&w=200&auto=format&fit=crop' },
-            { id: 3, name: 'Grower concentrate', category: 'Feed', price: 18200, size: '25kg', rating: 4.7, desc: 'Essential nutrients for grower birds.', imageUrl: 'https://images.unsplash.com/photo-1589923188900-85dae523342b?q=80&w=200&auto=format&fit=crop' },
-            { id: 4, name: 'Chicks concentrate', category: 'Feed', price: 19500, size: '25kg', rating: 4.9, desc: 'Optimal start for chicks.', imageUrl: 'https://images.unsplash.com/photo-1598449354452-96c857cc77fd?q=80&w=200&auto=format&fit=crop' },
-            { id: 5, name: 'Layer mash', category: 'Feed', price: 18000, size: '50kg', rating: 4.6, desc: 'Balanced mash for laying birds.', imageUrl: 'https://images.unsplash.com/photo-1628172905090-482a8536f947?q=80&w=200&auto=format&fit=crop' },
-            { id: 6, name: 'Laymax pellet', category: 'Feed', price: 18800, size: '50kg', rating: 4.8, desc: 'High-energy layer pellets.', imageUrl: 'https://images.unsplash.com/photo-1588667636606-25983792f397?q=80&w=200&auto=format&fit=crop' },
-            { id: 7, name: 'Grower mash', category: 'Feed', price: 18100, size: '50kg', rating: 4.5, desc: 'Formulated for steady growth.', imageUrl: 'https://images.unsplash.com/photo-1618210340575-d144e0573e13?q=80&w=200&auto=format&fit=crop' },
-            { id: 8, name: 'Layer grower pellet', category: 'Feed', price: 18400, size: '50kg', rating: 4.7, desc: 'Pellet feed for growing layers.', imageUrl: 'https://images.unsplash.com/photo-1536924940846-227afb31e2a5?q=80&w=200&auto=format&fit=crop' },
-            { id: 9, name: 'Commercial broiler finisher pellet', category: 'Feed', price: 19200, size: '50kg', rating: 4.9, desc: 'Maximum weight gain for broilers.', imageUrl: 'https://images.unsplash.com/photo-1606132646399-522646279f04?q=80&w=200&auto=format&fit=crop' },
-            { id: 10, name: 'Broiler starter crumbles', category: 'Feed', price: 18600, size: '50kg', rating: 4.8, desc: 'Easy-to-digest starter feed.', imageUrl: 'https://images.unsplash.com/photo-1598449354452-96c857cc77fd?q=80&w=200&auto=format&fit=crop' },
-            { id: 11, name: 'Promax starter crumbles', category: 'Feed', price: 20200, size: '50kg', rating: 4.9, desc: 'Advanced starter formula.', imageUrl: 'https://images.unsplash.com/photo-1598449354452-96c857cc77fd?q=80&w=200&auto=format&fit=crop' },
-            { id: 12, name: 'Promax finisher crumbles', category: 'Feed', price: 20500, size: '50kg', rating: 4.9, desc: 'Premium finisher crumble.', imageUrl: 'https://images.unsplash.com/photo-1606132646399-522646279f04?q=80&w=200&auto=format&fit=crop' }
+            { id: 1, name: 'Layer concentrate', category: 'Feed', price: 18500, size: '25kg', rating: 4.8, desc: 'High-quality layer concentrate for balanced nutrition.', image: 'https://images.unsplash.com/photo-1596492784531-20641347076a?q=80&w=200&auto=format&fit=crop' },
+            { id: 2, name: 'Broiler concentrate', category: 'Feed', price: 19000, size: '25kg', rating: 4.9, desc: 'Specially formulated for broiler growth.', image: 'https://images.unsplash.com/photo-1605000794959-122e23d00f60?q=80&w=200&auto=format&fit=crop' },
+            { id: 3, name: 'Grower concentrate', category: 'Feed', price: 18200, size: '25kg', rating: 4.7, desc: 'Essential nutrients for grower birds.', image: 'https://images.unsplash.com/photo-1589923188900-85dae523342b?q=80&w=200&auto=format&fit=crop' },
+            { id: 4, name: 'Chicks concentrate', category: 'Feed', price: 19500, size: '25kg', rating: 4.9, desc: 'Optimal start for chicks.', image: 'https://images.unsplash.com/photo-1598449354452-96c857cc77fd?q=80&w=200&auto=format&fit=crop' },
+            { id: 5, name: 'Layer mash', category: 'Feed', price: 18000, size: '50kg', rating: 4.6, desc: 'Balanced mash for laying birds.', image: 'https://images.unsplash.com/photo-1628172905090-482a8536f947?q=80&w=200&auto=format&fit=crop' },
+            { id: 6, name: 'Laymax pellet', category: 'Feed', price: 18800, size: '50kg', rating: 4.8, desc: 'High-energy layer pellets.', image: 'https://images.unsplash.com/photo-1588667636606-25983792f397?q=80&w=200&auto=format&fit=crop' },
+            { id: 7, name: 'Grower mash', category: 'Feed', price: 18100, size: '50kg', rating: 4.5, desc: 'Formulated for steady growth.', image: 'https://images.unsplash.com/photo-1618210340575-d144e0573e13?q=80&w=200&auto=format&fit=crop' },
+            { id: 8, name: 'Layer grower pellet', category: 'Feed', price: 18400, size: '50kg', rating: 4.7, desc: 'Pellet feed for growing layers.', image: 'https://images.unsplash.com/photo-1536924940846-227afb31e2a5?q=80&w=200&auto=format&fit=crop' },
+            { id: 9, name: 'Commercial broiler finisher pellet', category: 'Feed', price: 19200, size: '50kg', rating: 4.9, desc: 'Maximum weight gain for broilers.', image: 'https://images.unsplash.com/photo-1606132646399-522646279f04?q=80&w=200&auto=format&fit=crop' },
+            { id: 10, name: 'Broiler starter crumbles', category: 'Feed', price: 18600, size: '50kg', rating: 4.8, desc: 'Easy-to-digest starter feed.', image: 'https://images.unsplash.com/photo-1598449354452-96c857cc77fd?q=80&w=200&auto=format&fit=crop' },
+            { id: 11, name: 'Promax starter crumbles', category: 'Feed', price: 20200, size: '50kg', rating: 4.9, desc: 'Advanced starter formula.', image: 'https://images.unsplash.com/photo-1598449354452-96c857cc77fd?q=80&w=200&auto=format&fit=crop' },
+            { id: 12, name: 'Promax finisher crumbles', category: 'Feed', price: 20500, size: '50kg', rating: 4.9, desc: 'Premium finisher crumble.', image: 'https://images.unsplash.com/photo-1606132646399-522646279f04?q=80&w=200&auto=format&fit=crop' }
         ];
 
         let cart = [];
@@ -493,7 +493,7 @@
                 card.innerHTML = `
                     <div>
                         <div class="flex items-center justify-between mb-4">
-                            <img src="${p.imageUrl}" alt="${p.name}" class="w-16 h-16 rounded-2xl object-cover shadow-inner">
+                            <img src="${p.image}" alt="${p.name}" class="w-16 h-16 rounded-2xl object-cover shadow-inner">
                             <div class="flex items-center space-x-1 text-xs font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-full border border-amber-200">
                                 <i class="fa-solid fa-star"></i><span>${p.rating}</span>
                             </div>
