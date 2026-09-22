@@ -638,10 +638,8 @@
             if (cart.length === 0) {
                 return;
             }
-            alert('Order placed successfully! Your agricultural inputs are being prepared for farm delivery.');
-            cart = [];
-            updateCartBadge();
-            toggleCartModal();
+            localStorage.setItem('graced_cart', JSON.stringify(cart));
+            window.location.href = 'checkout.html';
         }
 
         function handleInquiry(e) {
